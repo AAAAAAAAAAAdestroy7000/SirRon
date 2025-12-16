@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// instead of using isset or empty, I used @ to suppress warnings
+// I used @ to suppress warnings
 // this ensures userid and username always exist as session variables
 if (@$_SESSION["userid"] == "") {
     $_SESSION["userid"] = "";
@@ -140,6 +140,7 @@ if ($sort != "") {
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="../css/styles.css">
+<link rel="stylesheet" href="../css/mobile_fix.css">
 
 <style>
 .page{display:flex;width:90%;max-width:1400px;margin:40px auto;gap:40px;align-items:flex-start;position:relative;}
@@ -161,40 +162,7 @@ if ($sort != "") {
 <body>
 
 <!-- navigation bar consistent with start.php -->
-<div class="nav-bar">
-    <div class="nav-inner">
-
-        <div class="nav-left">
-            <a href="start.php" class="logo-text">
-                GalaExtremist
-            </a>
-        </div>
-
-        <!-- center navigation links -->
-        <div class="nav-center">
-            <a href="trips.php">Trips</a>
-            <a href="forums.php">Forums</a>
-        </div>
-
-        <!-- session is used to determine which buttons should be shown -->
-        <div class="nav-right">
-            <?php if ($_SESSION["userid"] == "") { ?>
-                <a href="login.php" class="nav-btn">Login</a>
-                <a href="register.php" class="nav-btn">Register</a>
-            <?php } else { ?>
-                <!-- dropdown only appears when a user is logged in -->
-                <div class="dropdown">
-                    <a class="nav-btn dropbtn">Hello, <?php echo $_SESSION["username"]; ?></a>
-                    <div class="dropdown-content">
-                        <a href="MyBookings.php">My Bookings</a>
-                        <a href="../otherreqs/logout.php">Logout</a>
-                    </div>
-                </div>
-            <?php } ?>
-        </div>
-
-    </div>
-</div>
+<?php require_once "../otherreqs/navigationbar.php"; ?>
 
 <div class="page">
 

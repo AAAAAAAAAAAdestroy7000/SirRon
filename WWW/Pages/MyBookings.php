@@ -2,8 +2,8 @@
 session_start();
 
 /*
-I used @ to suppress errors instead of isset or empty.
-This makes sure that even if the session does not exist yet,
+I used @ to suppress errors
+this makes sure that even if the session does not exist yet,
 it will not throw warnings and will safely default to empty.
 */
 if (@$_SESSION["userid"] == "") {
@@ -12,8 +12,8 @@ if (@$_SESSION["userid"] == "") {
 }
 
 /*
-If there is no user logged in, the page should not be accessible.
-This forces the user to login first before seeing their bookings.
+if there is no user logged in, the page should not be accessible.
+this forces the user to login first before seeing their bookings.
 */
 if ($_SESSION["userid"] == "") {
     echo "<script>alert('You must login first.');</script>";
@@ -21,7 +21,7 @@ if ($_SESSION["userid"] == "") {
     exit();
 }
 
-/* Database connection setup */
+/* database connection setup */
 $serverName = "KORU";
 $connectionOptions = array(
     "Database" => "gala",
@@ -31,12 +31,12 @@ $connectionOptions = array(
 
 $conn = sqlsrv_connect($serverName, $connectionOptions);
 
-/* Get the currently logged-in user's ID */
+/* get the currently logged-in user's ID */
 $userID = $_SESSION["userid"];
 
 /*
-This query fetches all bookings made by the current user.
-It is ordered by ID descending so the latest bookings appear first.
+this query fetches all bookings made by the current user.
+it is ordered by ID descending so the latest bookings appear first.
 */
 $sql = "SELECT id, placeName, dateStart, dateEnd, message, pricePerDay, totalPrice, status 
         FROM BOOKINGS 
@@ -46,7 +46,7 @@ $sql = "SELECT id, placeName, dateStart, dateEnd, message, pricePerDay, totalPri
 $result = sqlsrv_query($conn, $sql);
 
 /*
-Bookings are stored into a custom array because sqlsrv_fetch_array
+bookings are stored into a custom array because sqlsrv_fetch_array
 only returns one row at a time.
 */
 $bookings = array();
@@ -68,13 +68,16 @@ require_once "../otherreqs/places.php";
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>My Bookings - GalaExtremists</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/styles.css">
+<link rel="stylesheet" href="../css/mobile_fix.css">
 
 <style>
-/* Specific styles for My Bookings */
+/* specific styles for my bookings */
 body{background:#f9f9f9;padding-top:80px;}
 .page-wrapper{width:100%;padding-top:100px;padding-bottom:60px;}
 .container{width:90%;max-width:1200px;margin:auto;}
@@ -88,7 +91,7 @@ body{background:#f9f9f9;padding-top:80px;}
 .small-value{font-size:15px;color:#444;font-weight:500;}
 .price-badge{background:#ecf0f1;color:#6f42c1;padding:6px 14px;border-radius:50px;font-weight:700;}
 
-/* Action buttons */
+/* action buttons */
 .action-link{font-size:13px;font-weight:600;text-decoration:none;padding:8px 16px;border-radius:50px;transition:0.3s;}
 .receipt-btn{color:#6f42c1;border:1px solid #6f42c1;background:transparent;}
 .receipt-btn:hover{background:#6f42c1;color:white;}
@@ -103,57 +106,14 @@ body{background:#f9f9f9;padding-top:80px;}
 
 .no-bookings{text-align:center;padding:80px;font-size:24px;color:#aaa;font-weight:600;}
 
-@media(max-width:900px){
-    .booking-grid{grid-template-columns:1fr;}
-    .booking-card{flex-direction:column;align-items:flex-start;}
-    .booking-img{width:100%;height:200px;}
-}
 </style>
 </head>
 
 <body>
 
-<!-- Navigation bar reused across pages -->
-<div class="nav-bar">
-    <div class="nav-inner">
-
-        <div class="nav-left">
-            <a href="start.php" class="logo-text">
-                GalaExtremist
-            </a>
-        </div>
-
-        <!-- center navigation links -->
-        <div class="nav-center">
-            <a href="trips.php">Trips</a>
-            <a href="forums.php">Forums</a>
-        </div>
-
-        <div class="nav-right">
-            <?php
-            /*
-            Dropdown is only shown when a user is logged in.
-            Otherwise, login and register buttons are displayed.
-            */
-            if ($_SESSION["userid"] != "") {
-                echo "
-                <div class='dropdown'>
-                    <a class='nav-btn dropbtn'>Hello, ".$_SESSION["username"]."</a>
-                    <div class='dropdown-content'>
-                        <a href='MyBookings.php'>My Bookings</a>
-                        <a href='../otherreqs/logout.php'>Logout</a>
-                    </div>
-                </div>
-                ";
-            } else {
-                echo "<a href='login.php' class='nav-btn'>Login</a>";
-                echo "<a href='register.php' class='nav-btn'>Register</a>";
-            }
-            ?>
-        </div>
-
-    </div>
-</div>
+<!-- navigation bar reused across pages -->
+<!-- navigation bar -->
+<?php require_once "../otherreqs/navigationbar.php"; ?>
 
 <div class="page-wrapper">
     <div class="container">
@@ -162,7 +122,7 @@ body{background:#f9f9f9;padding-top:80px;}
 
         <?php
         /*
-        If there are no bookings, a message is shown instead of cards.
+        if there are no bookings, a message is shown instead of cards.
         */
         $total = count($bookings);
 
@@ -175,7 +135,7 @@ body{background:#f9f9f9;padding-top:80px;}
         for ($i = 0; $i < $total; $i = $i + 1) {
 
             /*
-            Each booking row is unpacked into readable variables
+            each booking row is unpacked into readable variables
             so it is easier to display in HTML.
             */
             $placeName = $bookings[$i]["placeName"];
@@ -185,7 +145,7 @@ body{background:#f9f9f9;padding-top:80px;}
             $tp = $bookings[$i]["totalPrice"];
 
             /*
-            Dates from SQL Server sometimes return as DateTime objects,
+            dates from SQL Server sometimes return as DateTime objects,
             so they are formatted into readable strings.
             */
             if ($ds instanceof DateTime) { $ds = $ds->format("Y-m-d"); }
@@ -193,7 +153,7 @@ body{background:#f9f9f9;padding-top:80px;}
             if ($msg == "") { $msg = "(No message)"; }
 
             /*
-            Image number is determined by matching the booking name
+            image number is determined by matching the booking name
             against hotels, restaurants, and activities.
             */
             $imgNumber = 1;
@@ -228,7 +188,7 @@ body{background:#f9f9f9;padding-top:80px;}
         ?>
         <div class="booking-card">
 
-            <!-- Image fallback uses onerror to support different extensions -->
+            <!-- image fallback uses onerror to support different extensions -->
             <img src="../images/<?php echo $imgNumber; ?>.jpg"
                  class="booking-img"
                  onerror="this.src='../images/<?php echo $imgNumber; ?>.jpeg';this.onerror=null;"
@@ -269,7 +229,7 @@ body{background:#f9f9f9;padding-top:80px;}
                     </div>
                 </div>
 
-                <!-- Action buttons related to the booking -->
+                <!-- action buttons related to the booking -->
                 <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;">
                     <a href="BookingSuccess.php?place=<?php echo urlencode($placeName); ?>&price=<?php echo urlencode($tp); ?>&img=<?php echo urlencode($imgNumber); ?>"
                        class="action-link receipt-btn">
@@ -282,15 +242,15 @@ body{background:#f9f9f9;padding-top:80px;}
                     </a>
 
                     <?php
-                    // Show different buttons based on status
+                    // show different buttons based on status
                     if ($bookings[$i]["status"] == "Payment not initiated") {
-                        // Show Pay Online button - goes to PayMongo then updates status
+                        // show pay online button - goes to PayMongo then updates status
                         echo "<a href='paymongo_create.php?booking_id=".$bookings[$i]["id"]."&amount=".$tp."&title=".urlencode($placeName)."' class='action-link pay-btn'>Pay Online</a>";
                     } else if ($bookings[$i]["status"] == "Payment Successful") {
-                        // Show Cancel button
+                        // show cancel button
                         echo "<a href='../otherreqs/cancel_booking.php?id=".$bookings[$i]["id"]."' class='action-link cancel-btn' onclick='return confirm(\"Are you sure you want to cancel this booking?\");'>Cancel</a>";
                     } else if ($bookings[$i]["status"] == "Cancelled") {
-                        // Show Delete button
+                        // show delete button
                         echo "<a href='../otherreqs/delete_booking.php?id=".$bookings[$i]["id"]."' class='action-link delete-btn' onclick='return confirm(\"Are you sure you want to delete this booking?\");'>Delete</a>";
                     }
                     ?>

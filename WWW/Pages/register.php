@@ -12,13 +12,14 @@ $error = @$_GET["error"];
 <title>Register - GalaExtremists</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="/WWW/css/styles.css">
 
 <style>
-*{font-family:'Poppins', sans-serif;margin:0;padding:0;box-sizing:border-box;}
+/* *{font-family:'Poppins', sans-serif;margin:0;padding:0;box-sizing:border-box;} - Removed to use global styles */
 body{background:#FAFAFA;min-height:100vh;display:flex;flex-direction:column;position:relative;overflow-x:hidden;}
 
-/* Video background */
+/* video background */
 .bg-video{
     position:fixed;
     top:0;
@@ -40,7 +41,7 @@ body{background:#FAFAFA;min-height:100vh;display:flex;flex-direction:column;posi
     z-index:-1;
 }
 
-/* Override navbar to be transparent and match start.php positioning */
+/* override navbar to be transparent and match start.php positioning */
 .nav-bar{
     position: absolute !important;
     background:transparent !important;
@@ -48,7 +49,7 @@ body{background:#FAFAFA;min-height:100vh;display:flex;flex-direction:column;posi
     border-bottom:none !important;
 }
 
-/* Main content area */
+/* main content area */
 .register-container{
     flex:1;
     display:flex;
@@ -190,52 +191,38 @@ body{background:#FAFAFA;min-height:100vh;display:flex;flex-direction:column;posi
     border:1px solid #FCA5A5;
 }
 </style>
+<link rel="stylesheet" href="/WWW/css/mobile_fix.css">
 </head>
 
 <body>
 
-<!-- Video background with loop -->
-<video id="bgVideo" class="bg-video" autoplay muted>
-    <source src="/WWW/videos/1.mp4" type="video/mp4">
-</video>
+<!-- video background with loop -->
+<div id="bg-video-container" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:-2;">
+    <video id="bg-video-1" muted playsinline style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; opacity:0;"></video>
+    <video id="bg-video-2" muted playsinline style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; opacity:0;"></video>
+</div>
+<script src="../js/video_manager.js"></script>
 <div class="video-overlay"></div>
 
-<!-- Transparent navbar with centered logo -->
-<div class="nav-bar">
-    <div class="nav-inner">
+<!-- transparent navbar with centered logo -->
+<!-- navigation bar -->
+<?php require_once "../otherreqs/navigationbar.php"; ?>
 
-        <div class="nav-left">
-            <a href="/WWW/Pages/start.php" class="logo-text">GalaExtremist</a>
-        </div>
-
-        <!-- center navigation links -->
-        <div class="nav-center">
-            <a href="trips.php">Trips</a>
-            <a href="forums.php">Forums</a>
-        </div>
-
-        <!-- empty nav-right to maintain spacing -->
-        <div class="nav-right">
-        </div>
-
-    </div>
-</div>
-
-<!-- Register form -->
+<!-- register form -->
 <div class="register-container">
     <div class="register-box">
         
         <h1>Create account</h1>
         <p class="subtitle">Start your adventure with us today</p>
 
-        <!-- Error messages -->
+        <!-- error messages -->
         <?php if ($error != "") { ?>
             <div class="alert alert-error">
                 <?php echo $error; ?>
             </div>
         <?php } ?>
 
-        <!-- Register form -->
+        <!-- register form -->
         <form method="POST" action="/WWW/Inserts/registercheck.php">
             
             <div class="form-group">
@@ -266,7 +253,7 @@ body{background:#FAFAFA;min-height:100vh;display:flex;flex-direction:column;posi
             <span>or sign up with</span>
         </div>
 
-        <!-- Google Sign-Up -->
+        <!-- google sign-up -->
         <div style="display:flex;justify-content:center;margin-bottom:20px;">
             <div id="g_id_onload"
                  data-client_id="397070442652-a36b7hmfeah7sag869fsrgqdcpkvcrs6.apps.googleusercontent.com"
@@ -325,34 +312,6 @@ function handleCredentialResponse(response) {
 }
 </script>
 
-<script>
-// video loop logic - cycles through 1.mp4, 2.mp4, etc.
-var video = document.getElementById("bgVideo");
-var currentVideo = 1;
-
-video.addEventListener("ended", function() {
-    // try to load next video
-    currentVideo = currentVideo + 1;
-    var nextSrc = "/WWW/videos/" + currentVideo + ".mp4";
-    
-    // create a test to see if next video exists
-    var testVideo = document.createElement("video");
-    testVideo.src = nextSrc;
-    
-    testVideo.onerror = function() {
-        // if next video doesn't exist, loop back to 1
-        currentVideo = 1;
-        video.src = "/WWW/videos/1.mp4";
-        video.play();
-    };
-    
-    testVideo.onloadeddata = function() {
-        // if next video exists, play it
-        video.src = nextSrc;
-        video.play();
-    };
-});
-</script>
 
 </body>
 </html>

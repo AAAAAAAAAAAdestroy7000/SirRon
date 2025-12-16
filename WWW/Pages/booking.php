@@ -63,7 +63,9 @@ if ($_SESSION["userid"] == "") {
 <title>Booking - <?php echo $placeName; ?></title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="../css/styles.css">
+<link rel="stylesheet" href="../css/mobile_fix.css">
 
 <style>
 .wrapper{width:900px;margin:40px auto;background:white;padding:25px;border-radius:15px;border:2px solid #6f42c1;box-shadow:0 0 20px rgba(0,0,0,0.08);}
@@ -117,40 +119,8 @@ function updateTotal(){
 <body>
 
 <!-- main navigation bar that stays consistent across pages -->
-<div class="nav-bar">
-    <div class="nav-inner">
-
-        <div class="nav-left">
-            <a href="start.php" class="logo-text">
-                GalaExtremist
-            </a>
-        </div>
-
-        <!-- center navigation links -->
-        <div class="nav-center">
-            <a href="trips.php">Trips</a>
-            <a href="forums.php">Forums</a>
-        </div>
-
-        <!-- login/register buttons change depending on session state -->
-        <div class="nav-right">
-            <?php if ($_SESSION["userid"] == "") { ?>
-                <a href="login.php" class="nav-btn">Login</a>
-                <a href="register.php" class="nav-btn">Register</a>
-            <?php } else { ?>
-                <!-- dropdown only appears when a user is logged in -->
-                <div class="dropdown">
-                    <a class="nav-btn dropbtn">Hello, <?php echo $_SESSION["username"]; ?></a>
-                    <div class="dropdown-content">
-                        <a href="MyBookings.php">My Bookings</a>
-                        <a href="../otherreqs/logout.php">Logout</a>
-                    </div>
-                </div>
-            <?php } ?>
-        </div>
-
-    </div>
-</div>
+<!-- Navigation Bar -->
+<?php require_once "../otherreqs/navigationbar.php"; ?>
 
 <div class="wrapper">
 

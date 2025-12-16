@@ -35,7 +35,7 @@ if ($email == "") {
     exit();
 }
 
-// DB CONNECT
+// dc connect
 $serverName = "KORU";
 $connectionOptions = array(
     "Database" => "gala",
@@ -44,7 +44,7 @@ $connectionOptions = array(
 );
 $conn = sqlsrv_connect($serverName, $connectionOptions);
 
-// Check if account exists
+// check if account exists
 $sql = "SELECT id, username FROM USERS WHERE email='" . $email . "'";
 $result = sqlsrv_query($conn, $sql);
 $row = sqlsrv_fetch_array($result);
@@ -54,7 +54,7 @@ if (@$row["id"] == "" || $row["id"] == null) {
     exit();
 }
 
-// Log in
+// log in
 $_SESSION["userid"] = $row["id"];
 $_SESSION["username"] = $row["username"];
 

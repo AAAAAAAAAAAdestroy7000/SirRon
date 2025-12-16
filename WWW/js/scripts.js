@@ -66,9 +66,8 @@ function openModalInfo(name, localRating, modalId) {
             poweredElement.innerHTML = "";
         }
 
-        // creates an AJAX request to fetch TripAdvisor data
         var request = new XMLHttpRequest();
-        request.open("GET", "../API/ta_lookup.php?name=" + encodeURIComponent(name));
+        request.open("GET", "../otherreqs/ta_lookup.php?name=" + encodeURIComponent(name));
 
         request.onload = function () {
 

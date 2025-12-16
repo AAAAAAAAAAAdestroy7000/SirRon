@@ -31,7 +31,8 @@
                     <li style="margin-bottom:12px;"><a href="C:/xampp/htdocs/WWW/Pages/start.php" style="color:white;text-decoration:none;opacity:0.9;font-size:14px;transition:opacity 0.3s;">Home</a></li>
                     <li style="margin-bottom:12px;"><a href="C:/xampp/htdocs/WWW/Pages/trips.php" style="color:white;text-decoration:none;opacity:0.9;font-size:14px;transition:opacity 0.3s;">Browse Trips</a></li>
                     <li style="margin-bottom:12px;"><a href="C:/xampp/htdocs/WWW/Pages/MyBookings.php" style="color:white;text-decoration:none;opacity:0.9;font-size:14px;transition:opacity 0.3s;">My Bookings</a></li>
-                    <li style="margin-bottom:12px;"><a href="C:/xampp/htdocs/WWW/Pages/forums.php" style="color:white;text-decoration:none;opacity:0.9;font-size:14px;transition:opacity 0.3s;">Community Forums</a></li>
+                    <li style="margin-bottom:12px;"><a href="C:/xampp/htdocs/WWW/Pages/aboutus.php" style="color:white;text-decoration:none;opacity:0.9;font-size:14px;transition:opacity 0.3s;">About Us</a></li>
+                    <li style="margin-bottom:12px;"><a href="C:/xampp/htdocs/WWW/Pages/contactus.php" style="color:white;text-decoration:none;opacity:0.9;font-size:14px;transition:opacity 0.3s;">Contact Us</a></li>
                 </ul>
             </div>
 

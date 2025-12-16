@@ -1,0 +1,306 @@
+/* 
+   MOBILE OPTIMIZATION (Max Width 900px)
+   Stacks everything vertically for small screens by default,
+   but keeps Navbar horizontal as requested.
+*/
+@media only screen and (max-width: 900px) {
+
+    /* Ensure body doesn't side-scroll and remove top padding so nav flows naturally */
+    body,
+    html {
+        overflow-x: hidden !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding-top: 0 !important;
+    }
+
+    /* Unfix the navbar so it pushes content down instead of floating over it */
+    .nav-bar {
+        position: relative !important;
+        height: auto !important;
+        padding-bottom: 5px !important;
+    }
+
+    /* --- Navigation Bar Fixes (Horizontal Single Row) --- */
+    .nav-inner {
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 5px !important;
+        gap: 2px !important;
+    }
+
+    .nav-left {
+        width: auto !important;
+        margin-bottom: 0 !important;
+        flex: 0 0 auto !important;
+    }
+
+    .logo-text {
+        font-size: 16px !important;
+        /* Smaller logo for single row */
+    }
+
+    .nav-center {
+        position: static !important;
+        transform: none !important;
+        flex-direction: row !important;
+        justify-content: center !important;
+        width: auto !important;
+        gap: 8px !important;
+        margin-bottom: 0 !important;
+        flex: 1 1 auto !important;
+    }
+
+    .nav-center a {
+        display: inline-block !important;
+        padding: 2px 4px !important;
+        font-size: 11px !important;
+        /* Tiny links to fit */
+    }
+
+    .nav-right {
+        width: auto !important;
+        justify-content: flex-end !important;
+        padding-top: 0 !important;
+        gap: 5px !important;
+        flex: 0 0 auto !important;
+        margin-left: auto !important;
+        /* Force right alignment */
+    }
+
+    .nav-btn {
+        padding: 4px 8px !important;
+        font-size: 11px !important;
+    }
+
+    /* --- Global Containers --- */
+    .main-wrapper,
+    .page,
+    .container,
+    .main-container,
+    .content-container,
+    .two-column-layout {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 95% !important;
+        max-width: 100% !important;
+        padding: 15px !important;
+        margin: 0 auto !important;
+        gap: 20px !important;
+    }
+
+    /* --- Destination Page --- */
+    .left-side,
+    .right-side {
+        width: 100% !important;
+        padding: 20px !important;
+    }
+
+    .left-side img {
+        height: 250px !important;
+        min-height: 200px !important;
+    }
+
+    .right-side h1 {
+        font-size: 28px !important;
+    }
+
+    /* --- Trips Page Sidebar --- */
+    .sidebar {
+        width: 90% !important;
+        margin: 0 auto 20px auto !important;
+        padding: 20px !important;
+        border-radius: 12px !important;
+    }
+
+    .sidebar h3 {
+        font-size: 20px !important;
+        margin-bottom: 15px !important;
+    }
+
+    .sidebar input,
+    .sidebar select {
+        padding: 8px !important;
+        font-size: 14px !important;
+        margin-bottom: 10px !important;
+    }
+
+    .results {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* --- Featured Home Cards --- */
+    .featured-card {
+        flex-direction: column !important;
+        height: auto !important;
+    }
+
+    .featured-image,
+    .featured-content {
+        width: 100% !important;
+    }
+
+    .featured-image img {
+        height: 250px !important;
+    }
+
+    .featured-content {
+        padding: 25px !important;
+    }
+
+    /* --- Contact & About Grids --- */
+    .story-grid,
+    .values-grid,
+    .team-grid {
+        grid-template-columns: 1fr !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    /* --- Contact Page Specific --- */
+    .contact-hero {
+        height: auto !important;
+        padding: 40px 20px !important;
+    }
+
+    .contact-hero h1 {
+        font-size: 32px !important;
+    }
+
+    .contact-container {
+        flex-direction: column !important;
+    }
+
+    .info-card,
+    .form-card {
+        width: 100% !important;
+    }
+
+    /* --- Login & Register Forms --- */
+    .login-container,
+    .register-container {
+        width: 100% !important;
+        padding: 10px !important;
+        align-items: flex-start !important;
+    }
+
+    .login-box,
+    .register-box {
+        padding: 20px !important;
+        box-shadow: none !important;
+        border: 1px solid #eee !important;
+    }
+
+    .login-box h1,
+    .register-box h1 {
+        font-size: 24px !important;
+    }
+
+    .form-group input {
+        padding: 12px !important;
+    }
+
+    /* --- Footer --- */
+    .footer-content {
+        grid-template-columns: 1fr !important;
+        text-align: center !important;
+        gap: 30px !important;
+    }
+
+    /* --- Trips Search & Categories --- */
+    .search-bar div {
+        display: flex !important;
+        gap: 10px !important;
+    }
+
+    .search-bar input {
+        padding: 10px 15px !important;
+        font-size: 14px !important;
+        border: 1px solid #ccc !important;
+        height: auto !important;
+        border-radius: 8px !important;
+    }
+
+    .search-btn {
+        padding: 10px 20px !important;
+        font-size: 14px !important;
+        width: auto !important;
+        border-radius: 8px !important;
+    }
+
+    .btn1-toggle {
+        padding: 6px 12px !important;
+        font-size: 13px !important;
+        margin-bottom: 5px !important;
+    }
+
+    /* --- Trips Results Compaction --- */
+    .results .card {
+        margin-bottom: 20px !important;
+    }
+
+    .results .card-img-top {
+        height: 180px !important;
+        object-fit: cover !important;
+    }
+
+    .results .card-body {
+        padding: 15px !important;
+        padding-bottom: 60px !important;
+    }
+
+    .results h5 {
+        font-size: 18px !important;
+    }
+
+    .results .more-info-btn {
+        position: absolute !important;
+        width: auto !important;
+        font-size: 14px !important;
+        padding: 8px 20px !important;
+        bottom: 15px !important;
+        right: 15px !important;
+        margin: 0 !important;
+    }
+
+    /* --- My Bookings Mobile Fixes --- */
+    .booking-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+
+    .booking-card {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        padding: 15px !important;
+    }
+
+    .booking-img {
+        width: 100% !important;
+        height: 180px !important;
+        flex: 0 0 auto !important;
+        margin-bottom: 15px !important;
+    }
+
+    .booking-details {
+        width: 100% !important;
+    }
+
+    .booking-title {
+        font-size: 18px !important;
+        white-space: normal !important;
+        /* Allow wrapping */
+    }
+
+    .price-badge {
+        display: inline-block !important;
+        margin-bottom: 10px !important;
+    }
+
+    .small-value {
+        word-break: break-all !important;
+        /* prevent long text overflow */
+    }
+}

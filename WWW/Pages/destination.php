@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// instead of using isset or empty, @ is used to suppress warnings
+// @ is used to suppress warnings
 // this ensures session variables exist even if they were never set
 if (@$_SESSION["userid"] == "") {
     $_SESSION["userid"] = "";
@@ -51,21 +51,24 @@ $notes = $item["notes"];
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title><?php echo $name; ?> - GalaExtremists</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="../css/styles.css">
 
 <style>
 /* Specific styles for destination page */
-.main-wrapper{display:flex;justify-content:center;align-items:flex-start;padding-top:40px;padding-bottom:80px;width:90%;max-width:1200px;margin:0 auto;gap:50px;}
+.main-wrapper{display:flex;justify-content:center;align-items:stretch;padding-top:40px;padding-bottom:80px;width:96%;max-width:1800px;margin:0 auto;gap:30px;}
 .left-side{width:50%;}
-.left-side img{width:100%;height:500px;object-fit:cover;border-radius:24px;box-shadow:0 10px 40px rgba(0,0,0,0.15);}
-.right-side{width:50%;color:#333;background:white;padding:40px;border-radius:24px;box-shadow:0 4px 20px rgba(0,0,0,0.05);}
-.right-side h1{font-size:48px;font-weight:700;margin-bottom:20px;color:#111;line-height:1.2;}
-.detail-label{font-weight:600;color:#888;font-size:14px;text-transform:uppercase;letter-spacing:1px;margin-top:24px;margin-bottom:8px;}
-.detail-value{font-size:18px;color:#333;font-weight:500;}
-.notes-box{line-height:1.8;font-size:16px;color:#555;}
+.left-side img{width:100%;height:100%;min-height:280px;object-fit:cover;border-radius:24px;box-shadow:0 10px 40px rgba(0,0,0,0.15);}
+.right-side{width:50%;color:#333;background:white;padding:25px;border-radius:24px;box-shadow:0 4px 20px rgba(0,0,0,0.05);display:flex;flex-direction:column;justify-content:center;}
+.right-side h1{font-size:36px;font-weight:700;margin-bottom:10px;color:#111;line-height:1.2;}
+.detail-label{font-weight:600;color:#888;font-size:13px;text-transform:uppercase;letter-spacing:1px;margin-top:12px;margin-bottom:4px;}
+.detail-value{font-size:16px;color:#333;font-weight:500;}
+.notes-box{line-height:1.6;font-size:15px;color:#555;}
 
 /* Button styles */
 .action-btn{
@@ -83,45 +86,14 @@ $notes = $item["notes"];
 .btn-outline:hover{background:#6f42c1;color:white;}
 
 </style>
+<link rel="stylesheet" href="../css/mobile_fix.css">
 </head>
 
 <body>
 
 <!-- main navigation bar that stays consistent across pages -->
-<div class="nav-bar">
-    <div class="nav-inner">
-
-        <div class="nav-left">
-            <a href="start.php" class="logo-text">
-                GalaExtremist
-            </a>
-        </div>
-
-        <!-- center navigation links -->
-        <div class="nav-center">
-            <a href="trips.php">Trips</a>
-            <a href="forums.php">Forums</a>
-        </div>
-
-        <!-- login/register buttons change depending on session state -->
-        <div class="nav-right">
-            <?php if ($_SESSION["userid"] == "") { ?>
-                <a href="login.php" class="nav-btn">Login</a>
-                <a href="register.php" class="nav-btn">Register</a>
-            <?php } else { ?>
-                <!-- dropdown only appears when a user is logged in -->
-                <div class="dropdown">
-                    <a class="nav-btn dropbtn">Hello, <?php echo $_SESSION["username"]; ?></a>
-                    <div class="dropdown-content">
-                        <a href="MyBookings.php">My Bookings</a>
-                        <a href="../otherreqs/logout.php">Logout</a>
-                    </div>
-                </div>
-            <?php } ?>
-        </div>
-
-    </div>
-</div>
+<!-- Navigation Bar -->
+<?php require_once "../otherreqs/navigationbar.php"; ?>
 
 <div class="main-wrapper">
 
@@ -157,7 +129,7 @@ $notes = $item["notes"];
         <div class="notes-box"><?php echo $notes; ?></div>
 
         <!-- navigation buttons -->
-        <div style="margin-top:40px;display:flex;gap:20px;">
+        <div style="margin-top:25px;display:flex;gap:20px;">
             <a href="start.php" class="action-btn btn-outline">
                 Back to Homepage
             </a>
@@ -181,7 +153,7 @@ var name = box.getAttribute("data-name");
 
 // request TripAdvisor rating using AJAX
 var xhr = new XMLHttpRequest();
-xhr.open("GET","../API/ta_lookup.php?name=" + encodeURIComponent(name));
+xhr.open("GET","../otherreqs/ta_lookup.php?name=" + encodeURIComponent(name));
 
 xhr.onload = function(){
     var data = JSON.parse(this.responseText);

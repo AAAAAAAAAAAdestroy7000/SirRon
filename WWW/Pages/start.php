@@ -1,6 +1,6 @@
 <?php
 session_start();
-// instead of using issets or empty, I used @ instead to suppress error messages
+// I used @ instead to suppress error messages
 // this ensures userid and username always exist even if the session is new
 if (@$_SESSION["userid"] == "") {
     $_SESSION["userid"] = "";
@@ -91,46 +91,14 @@ for ($i = 0; $i < 6; $i = $i + 1) {
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="../css/styles.css">
+<link rel="stylesheet" href="../css/mobile_fix.css">
 
 </head>
 
 <body>
 
 <!-- main navigation bar that stays consistent across pages -->
-<div class="nav-bar">
-    <div class="nav-inner">
-
-        <div class="nav-left">
-            <a href="start.php" class="logo-text">
-                GalaExtremist
-            </a>
-        </div>
-
-        <!-- center navigation links -->
-        <div class="nav-center">
-            <a href="trips.php">Trips</a>
-            <a href="forums.php">Forums</a>
-        </div>
-
-        <!-- login/register buttons change depending on session state -->
-        <div class="nav-right">
-            <?php if ($_SESSION["userid"] == "") { ?>
-                <a href="login.php" class="nav-btn">Login</a>
-                <a href="register.php" class="nav-btn">Register</a>
-            <?php } else { ?>
-                <!-- dropdown only appears when a user is logged in -->
-                <div class="dropdown">
-                    <a class="nav-btn dropbtn">Hello, <?php echo $_SESSION["username"]; ?></a>
-                    <div class="dropdown-content">
-                        <a href="MyBookings.php">My Bookings</a>
-                        <a href="../otherreqs/logout.php">Logout</a>
-                    </div>
-                </div>
-            <?php } ?>
-        </div>
-
-    </div>
-</div>
+<?php require_once "../otherreqs/navigationbar.php"; ?>
 
 <!-- hero section with slideshow images -->
 <div class="hero text-white text-center">
@@ -145,11 +113,11 @@ for ($i = 0; $i < 6; $i = $i + 1) {
     <div class="container position-relative">
 
         <!-- main headline text -->
-        <h1 style="font-size:36px;font-weight:700;margin-bottom:8px;text-shadow:0 4px 10px rgba(0,0,0,0.3);">
+        <h1>
             Explore the world with us
         </h1>
 
-        <p style="font-size:15px;margin-bottom:0;font-weight:300;opacity:0.9;">
+        <p>
             Discover unforgettable destinations and create new memories
         </p>
 
@@ -173,7 +141,7 @@ for ($i = 0; $i < 6; $i = $i + 1) {
             <p class="featured-description"><?php echo $featured["notes"]; ?></p>
             <p class="featured-price"><?php echo $featured["price"]; ?></p>
             <a href="destination.php?id=<?php echo ($featured["img"] - 1); ?>" class="featured-btn">
-                Book Now
+                view details
             </a>
         </div>
 
@@ -184,7 +152,7 @@ for ($i = 0; $i < 6; $i = $i + 1) {
 <div class="container my-5">
     <div class="two-column-layout">
         
-        <!-- LEFT COLUMN: Random destinations grid -->
+        <!-- left column: random destinations grid -->
         <div class="left-column">
             <h2 class="section-title">Featured Destinations</h2>
 
@@ -224,7 +192,7 @@ for ($i = 0; $i < 6; $i = $i + 1) {
             </div>
         </div>
 
-        <!-- RIGHT COLUMN: Top category vertical list -->
+        <!-- right column: top category vertical list -->
         <div class="right-column">
             <h2 class="section-title">Top Destinations</h2>
 
@@ -323,7 +291,7 @@ for ($i = 0; $i < 6; $i = $i + 1) {
     </div>
 </div>
 
-<!-- Popular Hotels Carousel -->
+<!-- popular hotels carousel -->
 <div class="container my-5">
     <h2 class="section-title">Popular Hotels</h2>
     <div class="carousel-container">
@@ -354,7 +322,7 @@ for ($i = 0; $i < 6; $i = $i + 1) {
     </div>
 </div>
 
-<!-- Best Activities Carousel -->
+<!-- best activities carousel -->
 <div class="container my-5">
     <h2 class="section-title">Best Activities</h2>
     <div class="carousel-container">
@@ -385,7 +353,7 @@ for ($i = 0; $i < 6; $i = $i + 1) {
     </div>
 </div>
 
-<!-- Top-Rated Restaurants Carousel -->
+<!-- top-rated restaurants carousel -->
 <div class="container my-5">
     <h2 class="section-title">Top-Rated Restaurants</h2>
     <div class="carousel-container">
