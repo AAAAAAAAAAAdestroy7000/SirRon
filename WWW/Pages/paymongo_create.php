@@ -73,6 +73,7 @@ $jsonBody = json_encode($data);
 
 /*
 initialize cURL request.
+I copied this part from the PayMongo documentation because it is too hard to memorize.
 */
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, "https://api.paymongo.com/v1/links");

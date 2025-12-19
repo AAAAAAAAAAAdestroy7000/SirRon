@@ -64,12 +64,14 @@ for ($i = 0; $i < $restaurantCount; $i = $i + 1) {
 
 // simple shuffle logic using manual swapping
 // this randomizes the order of all places
+// I am doing this manually because I want to learn how swapping works
 $totalPlaces = count($allPlaces);
 for ($i = 0; $i < $totalPlaces; $i = $i + 1) {
     // pick a random index to swap with
     $randomIndex = rand(0, $totalPlaces - 1);
     
     // swap current item with random item
+    // using a temp variable to hold the value
     $temp = $allPlaces[$i];
     $allPlaces[$i] = $allPlaces[$randomIndex];
     $allPlaces[$randomIndex] = $temp;

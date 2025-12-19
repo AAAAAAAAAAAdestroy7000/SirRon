@@ -19,6 +19,7 @@ $item = "";
 $found = 0;
 
 // first range is reserved for hotels (0–9)
+// I am checking ranges because I don't know how to merge the arrays
 if ($id >= 0 && $id <= 9) {
     $item = $hotels[$id];
     $found = 1;

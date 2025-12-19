@@ -105,6 +105,7 @@ if ($sort != "") {
 
     // simple manual sorting using nested loops
     // avoids advanced PHP functions to stay beginner-level
+    // I am using bubble sort because it is the only one I know
     for ($i = 0; $i < $count; $i = $i + 1) {
         for ($j = $i + 1; $j < $count; $j = $j + 1) {
 

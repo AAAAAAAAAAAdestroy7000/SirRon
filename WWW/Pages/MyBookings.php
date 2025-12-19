@@ -155,6 +155,7 @@ body{background:#f9f9f9;padding-top:80px;}
             /*
             image number is determined by matching the booking name
             against hotels, restaurants, and activities.
+            I have to check every single array one by one.
             */
             $imgNumber = 1;
 

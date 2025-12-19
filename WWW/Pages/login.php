@@ -318,19 +318,13 @@ function handleCredentialResponse(response) {
 
     var form = document.createElement('form');
     form.method = 'POST';
-    form.action = '/WWW/otherreqs/google_login.php';
+    form.action = '/WWW/inserts/google_login.php';
 
     var input = document.createElement('input');
     input.type = 'hidden';
     input.name = 'token';
     input.value = token;
     form.appendChild(input);
-
-    var src = document.createElement('input');
-    src.type = 'hidden';
-    src.name = 'source';
-    src.value = 'login';
-    form.appendChild(src);
 
     document.body.appendChild(form);
     form.submit();

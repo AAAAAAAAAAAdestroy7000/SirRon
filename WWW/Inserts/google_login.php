@@ -10,7 +10,8 @@ if ($token == "") {
     exit();
 }
 
-// split JWT token into parts
+// I found this code on the internet to decode the google token
+// because I do not know how to do it manually
 $parts = explode(".", $token);
 $payload = "";
 

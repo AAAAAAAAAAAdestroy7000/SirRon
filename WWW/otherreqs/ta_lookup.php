@@ -16,38 +16,27 @@ $apiKey = "CF117863AC60432ABABC13AFD193329E";
 $referer = "https://abcdxd.com";
 $userAgent = "GalaExtremists/1.0";
 
-function curlGet($url, $params, $referer, $userAgent) {
-
-    $fullUrl = $url . "?" . http_build_query($params);
-
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $fullUrl);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt(
-        $ch,
-        CURLOPT_HTTPHEADER,
-        array(
-            "Referer: " . $referer,
-            "User-Agent: " . $userAgent,
-            "Accept: application/json"
-        )
-    );
-
-    $result = curl_exec($ch);
-    curl_close($ch);
-
-    return $result;
-}
-
 $searchUrl = "https://api.content.tripadvisor.com/api/v1/location/search";
 
-$searchParams = array(
-    "key" => $apiKey,
-    "language" => "en",
-    "searchQuery" => $name
+$fullUrl = $searchUrl . "?key=" . $apiKey . "&language=en&searchQuery=" . urlencode($name);
+
+// copy pasted code from internet to get data from website
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $fullUrl);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt(
+    $ch, 
+    CURLOPT_HTTPHEADER, 
+    array(
+        "Referer: " . $referer,
+        "User-Agent: " . $userAgent,
+        "Accept: application/json"
+    )
 );
 
-$searchJson = curlGet($searchUrl, $searchParams, $referer, $userAgent);
+$searchJson = curl_exec($ch);
+curl_close($ch);
+
 $searchData = json_decode($searchJson, true);
 
 if ($searchData == null || @$searchData["data"] == null) {
@@ -83,13 +72,25 @@ if ($taId == null) {
 }
 
 $detailsUrl = "https://api.content.tripadvisor.com/api/v1/location/" . $taId . "/details";
+$fullUrl = $detailsUrl . "?key=" . $apiKey . "&language=en";
 
-$detailsParams = array(
-    "key" => $apiKey,
-    "language" => "en"
+// doing the same curl thing again because I dont know how to make function
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $fullUrl);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt(
+    $ch, 
+    CURLOPT_HTTPHEADER, 
+    array(
+        "Referer: " . $referer,
+        "User-Agent: " . $userAgent,
+        "Accept: application/json"
+    )
 );
 
-$detailsJson = curlGet($detailsUrl, $detailsParams, $referer, $userAgent);
+$detailsJson = curl_exec($ch);
+curl_close($ch);
+
 $detailsData = json_decode($detailsJson, true);
 
 $rating = "";
